@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Holistic Harmony 🌿</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="brand-leaf">🌿</span>
+      <span class="brand-name">Holistic Harmony</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#home" class="nav-link active">Home</a></li>
+      <li><a href="#yoga-section" class="nav-link">Yoga Poses</a></li>
+      <li><a href="#mudra-section" class="nav-link">Mudras</a></li>
+      <li><a href="#ayurveda-section" class="nav-link">Ayurveda</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <div class="hero-bg-circles">
+      <div class="circle c1"></div>
+      <div class="circle c2"></div>
+      <div class="circle c3"></div>
+    </div>
+    <div class="hero-content">
+      <p class="hero-tagline">Find your inner balance</p>
+      <h1 class="hero-title">Holistic <em>Harmony</em></h1>
+      <p class="hero-desc">Discover the healing power of Yoga, Mudras, and Ayurveda — rooted in India's ancient traditions for a modern, mindful life.</p>
+      <a href="#yoga-section" class="btn-primary">Explore Yoga Poses</a>
+    </div>
+    <div class="hero-image-wrap">
+      <img src="https://res.cloudinary.com/dko1be2jy/image/upload/fl_sanitize/v1676483074/yoga-api/5_i64gif.svg" alt="Yoga pose illustration" class="hero-img" />
+    </div>
+  </section>
+
+  <!-- ===== YOGA POSES SECTION ===== -->
+  <section class="section" id="yoga-section">
+    <div class="section-header">
+      <span class="section-badge">Live from API</span>
+      <h2 class="section-title">Yoga Poses</h2>
+      <p class="section-subtitle">Explore poses from the ancient science of yoga — with benefits, instructions, and levels.</p>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search poses..." class="search-input" />
+      </div>
+      <select id="levelFilter" class="select-control">
+        <option value="all">All Levels</option>
+        <option value="Beginner">Beginner</option>
+        <option value="Intermediate">Intermediate</option>
+        <option value="Expert">Expert</option>
+      </select>
+      <select id="sortSelect" class="select-control">
+        <option value="default">Default Order</option>
+        <option value="az">A → Z</option>
+        <option value="za">Z → A</option>
+      </select>
+    </div>
+
+    <!-- Loading spinner -->
+    <div class="loader" id="loader">
+      <div class="spinner"></div>
+      <p>Loading yoga poses…</p>
+    </div>
+
+    <!-- Error state -->
+    <div class="error-state" id="errorState" style="display:none;">
+      <p>⚠️ Couldn't load poses. Please check your connection and try again.</p>
+      <button class="btn-primary" onclick="fetchPoses()">Retry</button>
+    </div>
+
+    <!-- No results -->
+    <div class="no-results" id="noResults" style="display:none;">
+      <p>🙅 No poses found. Try a different search or filter.</p>
+    </div>
+
+    <!-- Pose Cards Grid -->
+    <div class="cards-grid" id="posesGrid"></div>
+
+    <!-- Pose count -->
+    <p class="result-count" id="resultCount"></p>
+  </section>
+
+  <!-- ===== MUDRA SECTION ===== -->
+  <section class="section alt-bg" id="mudra-section">
+    <div class="section-header">
+      <span class="section-badge">Custom Dataset</span>
+      <h2 class="section-title">Mudras</h2>
+      <p class="section-subtitle">Sacred hand gestures that channel energy and restore balance in body and mind.</p>
+    </div>
+    <div class="cards-grid" id="mudraGrid"></div>
+  </section>
+
+  <!-- ===== AYURVEDA SECTION ===== -->
+  <section class="section" id="ayurveda-section">
+    <div class="section-header">
+      <span class="section-badge">Custom Dataset</span>
+      <h2 class="section-title">Ayurveda Tips</h2>
+      <p class="section-subtitle">Daily lifestyle wisdom from India's 5,000-year-old science of life.</p>
+    </div>
+    <div class="ayurveda-grid" id="ayurvedaGrid"></div>
+  </section>
+
+  <!-- ===== MODAL ===== -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box" id="modalBox">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="modal-content" id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <p>🌿 Holistic Harmony &nbsp;|&nbsp; Built with love for wellbeing &nbsp;|&nbsp; Yoga data via <a href="https://yoga-api-nzy4.onrender.com" target="_blank">yoga-api</a></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
