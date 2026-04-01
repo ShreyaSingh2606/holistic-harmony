@@ -2,6 +2,8 @@ Holistic Harmony 🌿
 📌 Project Description
 Holistic Harmony is a web application focused on mental health and overall wellbeing using traditional Indian practices such as Yoga, Mudras, and Ayurveda.
 The application aims to help users explore different techniques for stress relief, relaxation, and better lifestyle habits.
+
+
 🌐 API Used
 Primary API: __https://yoga-api-nzy4.onrender.com/v1/poses__
 
