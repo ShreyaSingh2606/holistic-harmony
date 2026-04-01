@@ -4,6 +4,8 @@ Holistic Harmony is a web application focused on mental health and overall wellb
 The application aims to help users explore different techniques for stress relief, relaxation, and better lifestyle habits.
 🌐 API Used
 Primary API: __https://yoga-api-nzy4.onrender.com/v1/poses__
+
+
 This API will be used to fetch yoga poses dynamically, including their instructions, benefits, and images.
 📊 Additional Data
 Custom datasets will be created and used for:
