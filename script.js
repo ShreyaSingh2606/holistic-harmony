@@ -69,7 +69,7 @@ function applyFilters() {
   }
 
   // -- Sort --
-  result = result.sort((a, b) => {
+  result = [...result].sort((a, b) => {
     if (sortBy === 'az') return a.english_name.localeCompare(b.english_name);
     if (sortBy === 'za') return b.english_name.localeCompare(a.english_name);
     return 0; // default: original API order
@@ -92,10 +92,35 @@ function renderPoses(poses) {
     return;
   }
 
-  poses.forEach((pose, index) => {
-    const card = createPoseCard(pose, index);
-    posesGrid.appendChild(card);
-  });
+posesGrid.innerHTML = poses.map((pose, index) => {
+  const level = pose.difficulty_level || 'Beginner';
+  const imgSrc = pose.url_png || pose.url_svg || '';
+  const benefits = pose.pose_benefits || 'No description available.';
+  const sanskrit = pose.sanskrit_name_adapted || pose.sanskrit_name || '';
+
+  return `
+    <div class="pose-card" style="animation-delay:${index * 0.05}s">
+      <div class="pose-img-wrap">
+        <img src="${imgSrc}" alt="${pose.english_name}"
+          onerror="this.src='https://via.placeholder.com/120x120?text=🧘'; this.onerror=null;">
+      </div>
+      <div class="pose-card-body">
+        <span class="pose-level level-${level.replace(' ','')}">${level}</span>
+        <h3 class="pose-name">${pose.english_name}</h3>
+        ${sanskrit ? `<p class="pose-sanskrit">${sanskrit}</p>` : ''}
+        <p class="pose-benefits">${benefits}</p>
+      </div>
+      <div class="pose-card-footer">
+        <button class="btn-detail" data-id="${pose.id}">View Details</button>
+      </div>
+    </div>
+  `;
+}).join("");
+document.querySelectorAll('.btn-detail').forEach((btn, index) => {
+  btn.addEventListener('click', () => openModal(poses[index]));
+});
+
+
 
   resultCount.textContent = `Showing ${poses.length} pose${poses.length !== 1 ? 's' : ''}`;
 }
@@ -317,8 +342,15 @@ function renderAyurveda() {
 
 // ============================================================
 //  7. EVENT LISTENERS
-// ============================================================
-searchInput.addEventListener('input', applyFilters);
+let debounceTimer;
+
+searchInput.addEventListener('input', () => {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(() => {
+    applyFilters();
+  }, 300);
+});
+
 levelFilter.addEventListener('change', applyFilters);
 sortSelect.addEventListener('change', applyFilters);
 
